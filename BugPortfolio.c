@@ -1,10 +1,5 @@
 #include <stdlib.h>
 #include <string.h>
-void test() {
-	int *p = malloc(sizeof(int));
-	free(p);
-	*p = 1; // warn: use after free
-}
 
 int f(int *p) __attribute__((nonnull));
 int f(int *p) { return *p; }
@@ -42,8 +37,8 @@ void doubleFree() {
 }
 
 void uninitializedValue() {
-	void (*foo)(void);
-	foo(); // warn: function pointer is uninitialized
+	int x;
+	divideZero(x);
 }
 
 void memoryLeak() {
@@ -69,6 +64,5 @@ void allocatorSizeOfMismatch() {
 }
 
 int main() {
-	int i = 0;
 	return 0;
 }
